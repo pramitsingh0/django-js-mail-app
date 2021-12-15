@@ -170,7 +170,7 @@ def register(request):
         except IntegrityError as e:
             print(e)
             return render(request, "mail/register.html", {
-                "message": "Email address already taken."
+                "message": "Account already exists"
             })
         login(request, user)
         return HttpResponseRedirect(reverse("index"))

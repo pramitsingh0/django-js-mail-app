@@ -1,9 +1,8 @@
 {% extends "mail/layout.html" %}
 
 {% block body %}
-
+<div class="card shadow w-50 p-3 mt-5 mx-auto">
     <h2>Register</h2>
-
     {% if message %}
         <div>{{ message }}</div>
     {% endif %}
@@ -19,9 +18,11 @@
         <div class="form-group">
             <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
         </div>
-        <input class="btn btn-primary" type="submit" value="Register">
+        <div style="display: flex; justify-content: center;">
+            <input class="btn btn-primary" type="submit" value="Register">
+        </div>
     </form>
 
-    Already have an account? <a href="{% url 'login' %}">Log In here.</a>
-
+    <p style="white-space: nowrap;">Already have an account? <a href="{% url 'login' %}">Log In here.</a></p>
+</div>
 {% endblock %}

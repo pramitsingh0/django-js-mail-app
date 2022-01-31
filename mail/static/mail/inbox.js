@@ -120,9 +120,9 @@ function view_mail(mailId) {
 
 
                           
-                          <div id="mail-body" class="card card-body">
-                            ${mail["body"]}
-                          </div>
+<div id="mail-body" class="card card-body" style="white-space: pre-wrap;">
+  ${mail["body"]}
+</div>
                           `;
     document.querySelector('#email-view').append(mail_div);
     document.querySelector('#mail-body').style.marginTop = "40px";

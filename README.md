@@ -24,6 +24,10 @@ $ cd django-js-mail-app
 ### Usage
 
 
+
+https://user-images.githubusercontent.com/52959209/151793110-6b139e3b-c4b0-40f9-8e10-1f1748222012.mp4
+
+
 Make migrations to the database:
 ```
 $ python manage.py makemigrations

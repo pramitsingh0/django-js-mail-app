@@ -62,10 +62,12 @@ function load_mailbox(mailbox) {
 /////////////////////////CUSTOM FUNCTIONS//////////////////////////////
 
 function send_mail(event) {
+  // Fetch email data from compose box
   const recipient = document.querySelector('#compose-recipients').value;
   const body = document.querySelector('#compose-body').value;
   const subject = document.querySelector('#compose-subject').value;
   fetch('/emails', {
+    // Send http post request to backend with body
     method: 'POST',
     body: JSON.stringify({
       recipients: recipient,
@@ -73,6 +75,7 @@ function send_mail(event) {
       subject: subject
     })
   })
+  // convert to json
   .then(response => response.json())
     .then(result => {
       if ("message" in result) {
@@ -84,20 +87,23 @@ function send_mail(event) {
         document.querySelector('#notification').innerHTML = result['error'];
       }
     })
+    // prevent default action of form submit
   return false;
 }
 
 function view_mail(mailId) {
+  // Clear space for viewing emails
   document.querySelector('#emails-view').style.display = 'none';
   document.querySelector('#compose-view').style.display = 'none';
   document.querySelector('#email-view').style.display = 'block';
   document.querySelector('#email-view').innerHTML = "";
-
+  // Send get request to /emails/mailId
   fetch('/emails/' + mailId)
   .then(response => response.json())
   .then(mail => {
     const mail_div = document.createElement('div')
     mail_div.setAttribute('id', 'mail-container')
+    // Card display for emails
     mail_div.innerHTML = `
                           <div class="card" style="width: fit-content;">
                             <ul class="list-group list-group-flush">
@@ -123,16 +129,17 @@ function view_mail(mailId) {
 <div id="mail-body" class="card card-body" style="white-space: pre-wrap;">
   ${mail["body"]}
 </div>
-                          `;
+`;
     document.querySelector('#email-view').append(mail_div);
     document.querySelector('#mail-body').style.marginTop = "40px";
+    // Mark the mail as read when mail is opened
     if (!mail['read']) {
       fetch('/emails/' + mailId, {
         method: 'PUT',
         body: JSON.stringify({ read : true })
       })
     }
-
+    // Set archive property of mail to true
     document.querySelector('#archive').addEventListener('click', () => {
       fetch('/emails/' + mailId, {
         method: 'PUT',
@@ -140,6 +147,8 @@ function view_mail(mailId) {
       })
       .then(response => load_mailbox('inbox'))
     })
+
+    // Reply to the mail
     document.querySelector('#reply').addEventListener('click', () => {
       compose_email();
       fetch('/emails/' + mailId)

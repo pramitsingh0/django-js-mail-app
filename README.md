@@ -1,5 +1,5 @@
-# Mail
-Mail, as the name suggests is an email service, built with django working in the backend and javascript in the frontend to work as an ***Single Page Application*** (SPA), where you register for an email account, login/logout of your, compose and send a mail, read mails, archive mails. 
+# DMail
+DMail, as the name suggests is an email service, built with django working in the backend and javascript in the frontend to work as an ***Single Page Application*** (SPA), where you register for an email account, login/logout of your, compose and send a mail, read mails, archive mails. 
 
 ## Installation
 
